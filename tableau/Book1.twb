@@ -473,6 +473,21 @@
       </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
     </datasource>
   </datasources>
+  <shared-views>
+    <shared-view name='federated.1mhl8qf04sjthb18y0ixy0fpvidu'>
+      <datasources>
+        <datasource caption='AB_NYC_2019' name='federated.1mhl8qf04sjthb18y0ixy0fpvidu' />
+      </datasources>
+      <datasource-dependencies datasource='federated.1mhl8qf04sjthb18y0ixy0fpvidu'>
+        <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
+        <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
+      </datasource-dependencies>
+      <filter class='categorical' column='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]'>
+        <groupfilter function='level-members' level='[none:room_type:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+        <target field='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]' />
+      </filter>
+    </shared-view>
+  </shared-views>
   <actions>
     <action caption='Highlight 1 (generated)' name='[Action1_7535F486AD274457A28D669C2673B7CA]'>
       <activation auto-clear='true' type='on-select' />
@@ -521,11 +536,20 @@
             </column-instance>
             <column caption='Neighbourhood Group' datatype='string' name='[neighbourhood_group]' role='dimension' type='nominal' />
             <column-instance column='[neighbourhood_group]' derivation='None' name='[none:neighbourhood_group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column aggregation='Sum' caption='Number Of Reviews' datatype='integer' name='[number_of_reviews]' role='dimension' type='ordinal' />
+            <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
             <column-instance column='[number_of_reviews]' derivation='Sum' name='[sum:number_of_reviews:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.false...column caption='AB_NYC_2019_subway_info.csv' datatype='integer' name='[__tableau_internal_object_id__].[AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[Action (Neighbourhood Group)]'>
+            <groupfilter function='level-members' level='[neighbourhood_group]' user:ui-action-filter='[Action3_0966FFA660A3441AB296C8E5E1E861D2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
           <computed-sort column='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:neighbourhood_group:nk]' direction='ASC' using='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[__tableau_internal_object_id__].[cnt:AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC:qk]' />
+          <slices>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[Action (Neighbourhood Group)]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -699,13 +723,18 @@
             <column-instance column='[__tableau_internal_object_id__].[AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC:qk]' pivot='key' type='quantitative' />
             <column caption='Neighbourhood Group' datatype='string' name='[neighbourhood_group]' role='dimension' type='nominal' />
             <column-instance column='[neighbourhood_group]' derivation='None' name='[none:neighbourhood_group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column-instance column='[__tableau_internal_object_id__].[AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC]' derivation='Count' name='[pcto:cnt:AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC:qk:5]' pivot='key' type='quantitative'>
               <table-calc ordering-field='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:subway_proximity:nk]' ordering-type='Field' type='PctTotal' />
             </column-instance>
+            <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
             <column caption='Subway Proximity' datatype='string' name='[subway_proximity]' role='dimension' type='nominal' />
             <_.fcp.ObjectModelTableType.false...column caption='AB_NYC_2019_subway_info.csv' datatype='integer' name='[__tableau_internal_object_id__].[AB_NYC_2019_subway_info.csv_866CD9DB51AB4A73AF7862513E3EB2FC]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <slices>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -781,6 +810,7 @@
           </filter>
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[Action (Neighbourhood Group)]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -831,7 +861,9 @@
           <datasource-dependencies datasource='federated.1mhl8qf04sjthb18y0ixy0fpvidu'>
             <column caption='Neighbourhood Group' datatype='string' name='[neighbourhood_group]' role='dimension' type='nominal' />
             <column-instance column='[neighbourhood_group]' derivation='None' name='[none:neighbourhood_group:nk]' pivot='key' type='nominal' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column aggregation='Sum' caption='Number Of Reviews' datatype='integer' name='[number_of_reviews]' role='dimension' type='ordinal' />
+            <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
             <column-instance column='[number_of_reviews]' derivation='Sum' name='[sum:number_of_reviews:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[Action (Neighbourhood Group)]'>
@@ -839,6 +871,7 @@
           </filter>
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[Action (Neighbourhood Group)]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -949,9 +982,11 @@
             <column caption='Neighbourhood Group' datatype='string' name='[neighbourhood_group]' role='dimension' type='nominal' />
             <column-instance column='[neighbourhood_group]' derivation='None' name='[none:neighbourhood_group:nk]' pivot='key' type='nominal' />
             <column-instance column='[number_of_reviews]' derivation='None' name='[none:number_of_reviews:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column aggregation='Sum' caption='Number Of Reviews' datatype='integer' name='[number_of_reviews]' role='dimension' type='ordinal' />
             <column caption='Price' datatype='integer' name='[price]' role='measure' type='quantitative' />
+            <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
             <column caption='Subway Proximity' datatype='string' name='[subway_proximity]' role='dimension' type='nominal' />
           </datasource-dependencies>
           <filter class='quantitative' column='[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[avg:price:qk]' included-values='in-range'>
@@ -959,6 +994,7 @@
           </filter>
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[avg:price:qk]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1007,6 +1043,7 @@
             <column-instance column='[number_of_reviews]' derivation='None' name='[none:number_of_reviews:ok]' pivot='key' type='ordinal' />
             <column-instance column='[price]' derivation='None' name='[none:price:qk]' pivot='key' type='quantitative' />
             <column-instance column='[reviews_per_month]' derivation='None' name='[none:reviews_per_month:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column aggregation='Sum' caption='Number Of Reviews' datatype='integer' name='[number_of_reviews]' role='dimension' type='ordinal' />
             <column caption='Price' datatype='integer' name='[price]' role='measure' type='quantitative' />
@@ -1027,6 +1064,7 @@
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:reviews_per_month:qk]</column>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:price:qk]</column>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:number_of_reviews:ok]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1068,6 +1106,7 @@
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column-instance column='[availability_365]' derivation='None' name='[none:availability_365:qk]' pivot='key' type='quantitative' />
             <column-instance column='[price]' derivation='None' name='[none:price:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column caption='Price' datatype='integer' name='[price]' role='measure' type='quantitative' />
             <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
@@ -1078,6 +1117,7 @@
           </filter>
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:price:qk]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1119,6 +1159,7 @@
             <column caption='Minimum Nights' datatype='integer' name='[minimum_nights]' role='measure' type='quantitative' />
             <column-instance column='[minimum_nights]' derivation='None' name='[none:minimum_nights:qk]' pivot='key' type='quantitative' />
             <column-instance column='[price]' derivation='None' name='[none:price:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column caption='Price' datatype='integer' name='[price]' role='measure' type='quantitative' />
             <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
@@ -1133,6 +1174,7 @@
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:price:qk]</column>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:minimum_nights:qk]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1176,6 +1218,7 @@
             <column-instance column='[calculated_host_listings_count]' derivation='None' name='[none:calculated_host_listings_count:qk]' pivot='key' type='quantitative' />
             <column-instance column='[minimum_nights]' derivation='None' name='[none:minimum_nights:qk]' pivot='key' type='quantitative' />
             <column-instance column='[price]' derivation='None' name='[none:price:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[room_type]' derivation='None' name='[none:room_type:nk]' pivot='key' type='nominal' />
             <column-instance column='[subway_proximity]' derivation='None' name='[none:subway_proximity:nk]' pivot='key' type='nominal' />
             <column caption='Price' datatype='integer' name='[price]' role='measure' type='quantitative' />
             <column caption='Room Type' datatype='string' name='[room_type]' role='dimension' type='nominal' />
@@ -1190,6 +1233,7 @@
           <slices>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:price:qk]</column>
             <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:minimum_nights:qk]</column>
+            <column>[federated.1mhl8qf04sjthb18y0ixy0fpvidu].[none:room_type:nk]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -1307,8 +1351,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1100' minheight='1100' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='44' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='43' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='46' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='45' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone h='7422' id='38' type-v2='text' w='98828' x='586' y='1042'>
                   <formatted-text>
                     <run bold='true' fontalignment='1' fontsize='20'>Borough information</run>
@@ -1437,8 +1481,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='750' minheight='750' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='20' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='19' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='22' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='21' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone forceUpdate='true' h='7161' id='14' type-v2='text' w='98828' x='586' y='1042'>
                   <formatted-text>
                     <run bold='true' fontalignment='1' fontsize='20'>Closest Subway Station </run>
@@ -1565,8 +1609,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='20' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='19' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='22' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='21' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone forceUpdate='true' h='9375' id='12' type-v2='text' w='98828' x='586' y='1042'>
                   <formatted-text>
                     <run bold='true' fontalignment='1' fontsize='20'>Price relationships</run>
